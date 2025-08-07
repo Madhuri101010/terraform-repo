@@ -9,16 +9,14 @@ terraform {
 
 provider "docker" {}
 
-# Pull the Nginx image
 resource "docker_image" "nginx" {
   name         = "nginx:latest"
   keep_locally = false
 }
 
-# Run the Nginx container
 resource "docker_container" "nginx" {
   name  = "my-nginx"
-  image = docker_image.nginx.latest
+  image = docker_image.nginx.name
 
   ports {
     internal = 80
